@@ -1,6 +1,5 @@
-##适配dart null safety -- by gromoo
+## 适配dart null safety -- by gromoo
 
-[![QQ Group](https://img.shields.io/badge/QQ%20Group-862401307-red.svg)]()
 # JPush Flutter Plugin
 
 ### 安装
@@ -8,17 +7,9 @@
 在工程 pubspec.yaml 中加入 dependencies
 
 ```
-  
-//github  集成
 dependencies:
   jpush_flutter:
-    git:
-      url: git://github.com/jpush/jpush-flutter-plugin.git
-      ref: master
-      
-// pub 集成
-dependencies:
-  jpush_flutter: 0.6.1
+    git: https://github.com/gromoo/jpush-flutter-plugin
 ```
 
 ### 配置
