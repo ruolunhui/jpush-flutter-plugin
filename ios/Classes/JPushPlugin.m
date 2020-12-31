@@ -540,12 +540,22 @@ static NSMutableArray<FlutterResult>* getRidResults;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    //  application.applicationIconBadgeNumber = 1;
-    //  application.applicationIconBadgeNumber = 0;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [JPUSHService registerDeviceToken:deviceToken];
+}
+
+//点击App图标，使App从后台恢复至前台
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    [application setApplicationIconBadgeNumber:0];
+    [application cancelAllLocalNotifications];
+}
+
+//按Home键使App进入后台
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+    [application setApplicationIconBadgeNumber:0];
+    [application cancelAllLocalNotifications];
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
@@ -599,8 +609,9 @@ static NSMutableArray<FlutterResult>* getRidResults;
     }else{
         JPLog(@"iOS10 前台收到本地通知:userInfo：%@",userInfo);
     }
-    
     completionHandler(notificationTypes);
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [JPUSHService setBadge:0];
 }
 
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler  API_AVAILABLE(ios(10.0)){
@@ -638,6 +649,8 @@ static NSMutableArray<FlutterResult>* getRidResults;
         });
     }
     completionHandler();
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [JPUSHService setBadge:0];
 }
 
 - (void)jpushNotificationAuthorization:(JPAuthorizationStatus)status withInfo:(NSDictionary *)info {
