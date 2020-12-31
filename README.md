@@ -1,4 +1,4 @@
-##适配dart null safety -- by gromoo
+## 适配dart null safety -- by gromoo
 
 [![QQ Group](https://img.shields.io/badge/QQ%20Group-862401307-red.svg)]()
 # JPush Flutter Plugin
